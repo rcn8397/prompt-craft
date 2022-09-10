@@ -4,7 +4,7 @@ import os
 from random import randint
 
 from PyQt5.QtWidgets import (
-    QApplication, QDialog, QMainWindow, QMessageBox
+    QApplication, QDialog, QMainWindow, QMessageBox, QFileDialog
 )
 
 from PyQt5.uic import loadUi
@@ -17,6 +17,7 @@ PREC_FULL = 'full'
 PREC_AUTO = 'autocast'
 PRECISION = [ PREC_FULL, PREC_AUTO ]
 
+
 class Window( QMainWindow, Ui_MainWindow ):
     def __init__( self, parent = None ):
         super().__init__(parent)
@@ -24,6 +25,9 @@ class Window( QMainWindow, Ui_MainWindow ):
         self.modeSetup()
         self.precisionSetup()
         self.connectSignalsSlots()
+
+        # Set widget states (allows designer to change)
+        self.setSeedEnabled()
 
     def modeSetup(self):
         self.modeBox.addItems( MODES )
@@ -41,6 +45,27 @@ class Window( QMainWindow, Ui_MainWindow ):
         mode       = self.modeBox.currentText()
         print( 'mode updated to: {} '.format(  mode ) )
 
+    def setSeedEnabled( self ):
+        rand_seed = self.rand_seed.isChecked()
+        use_seed  = self.use_seed.isChecked()        
+        self.seed.setEnabled( ( not rand_seed ) and use_seed )
+        self.rand_seed.setEnabled( use_seed )
+    
+    def toggle_rand_seed( self ):
+        self.setSeedEnabled()
+
+    def toggle_use_seed( self ):
+        self.setSeedEnabled()
+
+    def init_image_dialog( self ):
+        start = os.path.expanduser( '~/Pictures' )
+        fname = QFileDialog.getOpenFileName( self, 'init-img', start )[0]
+        self.init_img.setText( fname )
+
+    def outdir_dialog( self ):
+        path = QFileDialog.getExistingDirectory( self, 'outdir', 'All Directories' )
+        self.outdir.setText( path )
+    
     def run_prompt(self):
         print( 'working' )
         prompt     = self.prompt.toPlainText()
@@ -58,6 +83,10 @@ class Window( QMainWindow, Ui_MainWindow ):
             seed = randint(0, 4294967295 )
         
         init_image = self.init_img.text()
+        # Unsure if this will be needed...
+        # if init_image.startswith('~'):
+        #     init_image = os.path.expanduser( init_image )
+            
         outdir     = self.outdir.text()
         mode       = self.modeBox.currentText()
         scripts    = { TXT2IMG_STR: 'scripts/txt2img.py',
