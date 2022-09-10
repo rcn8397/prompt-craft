@@ -27,9 +27,11 @@ class Window( QMainWindow, Ui_MainWindow ):
         n_samples = self.n_samples.value()
         n_iter    = self.n_iter.value()
         strength  = self.strength.value()
-        cmd = 'python scripts/img2img.py --prompt "{}" --n_iter {} --init-img {} --strength {}'   
-        print( cmd.format( prompt, n_samples, n_iter, strength ) )
-        os.system( cmd )
+        init_image = '~/Pictures/rynoface.JPG'
+        cmd = 'python scripts/img2img.py --prompt "{}" --n_samples {} --n_iter {} --init-img {} --strength {}'
+        execute = cmd.format( prompt, n_samples, n_iter, init_image, strength )
+        print( execute )
+        os.system( execute )
 
     def about(self):
         QMessageBox.about(
@@ -51,4 +53,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     win = Window()
     win.show()
-    sys.exit(app.exec())    
+    sys.exit(app.exec())
