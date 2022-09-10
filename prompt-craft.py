@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import os
+from random import randint
 
 from PyQt5.QtWidgets import (
     QApplication, QDialog, QMainWindow, QMessageBox
@@ -48,6 +49,13 @@ class Window( QMainWindow, Ui_MainWindow ):
         strength   = self.strength.value()
         ddim_eta   = self.ddim_eta.value()
         ddim_step  = self.ddim_step.value()
+        plms       = self.plms.isChecked()
+        seed       = self.seed.value()
+        rand_seed  = self.rand_seed.isChecked()
+        use_seed   = self.use_seed.isChecked()
+
+        if rand_seed:
+            seed = randint(0, 4294967295 )
         
         init_image = self.init_img.text()
         outdir     = self.outdir.text()
@@ -71,11 +79,13 @@ class Window( QMainWindow, Ui_MainWindow ):
         _strength  = ' --strength {}'.format( strength )
         _height    = ' --H {}'.format( height )
         _width     = ' --W {}'.format( width )
+        _plms      = ' --plsm'
         _ddim_eta  = ' --ddim_eta {}'.format( ddim_eta )
         _ddim_step = ' --ddim_step {}'.format( ddim_step )        
         _precision = ' --precision {}'.format( precision )
         _init_img  = ' --init-img {}'.format( init_image )
         _outdir    = ' --outdir {}'.format( outdir )
+        _seed      = ' --seed {}'.format( seed )
 
         # Craft the command
         cmd = ''
@@ -97,6 +107,9 @@ class Window( QMainWindow, Ui_MainWindow ):
         # img2txt options
         #cmd += _strength
         #cmd += _init_img
+
+        if use_seed:
+            cmd += _seed
         
         execute = cmd
         

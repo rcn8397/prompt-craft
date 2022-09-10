@@ -39,6 +39,9 @@
     </sizepolicy>
    </property>
    <widget class="QTabWidget" name="tabWidget">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -72,7 +75,7 @@
        <rect>
         <x>21</x>
         <y>291</y>
-        <width>315</width>
+        <width>327</width>
         <height>216</height>
        </rect>
       </property>
@@ -219,30 +222,40 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="2">
-        <widget class="QSpinBox" name="seed">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="value">
-          <number>3</number>
+       <item row="6" column="0" colspan="2">
+        <widget class="QCheckBox" name="plms">
+         <property name="text">
+          <string>plms</string>
          </property>
         </widget>
        </item>
-       <item row="5" column="3" colspan="2">
-        <widget class="QCheckBox" name="seed_val">
+       <item row="5" column="5">
+        <widget class="QCheckBox" name="rand_seed">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="text">
           <string>rand seed</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="0" colspan="2">
-        <widget class="QCheckBox" name="plms">
+       <item row="5" column="2" colspan="2">
+        <widget class="QSpinBox" name="seed">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="value">
+          <number>3</number>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="5">
+        <widget class="QCheckBox" name="use_seed">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="text">
-          <string>plms</string>
+          <string>use seed</string>
          </property>
         </widget>
        </item>
