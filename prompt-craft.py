@@ -32,7 +32,8 @@ class Window( QMainWindow, Ui_MainWindow ):
     def modeSetup(self):
         self.modeBox.addItems( MODES )
         self.modeBox.activated.connect( self.mode_update )
-
+        self.toggle_mode()
+        
     def precisionSetup(self):
         self.precisionBox.addItems( PRECISION )
         
@@ -56,6 +57,12 @@ class Window( QMainWindow, Ui_MainWindow ):
 
     def toggle_use_seed( self ):
         self.setSeedEnabled()
+
+    def toggle_mode( self ):
+        mode = self.modeBox.currentIndex()
+        self.plms.setEnabled( mode == 0 )
+        self.init_img.setEnabled( mode == 1 )
+        self.input_browse.setEnabled( mode == 1 )
 
     def init_image_dialog( self ):
         start = os.path.expanduser( '~/Pictures' )
@@ -130,12 +137,14 @@ class Window( QMainWindow, Ui_MainWindow ):
         #cmd += _outdir
         
         # txt2img options
-        cmd += _height
-        cmd += _width
+        if mode == TXT2IMG_STR:
+            cmd += _height
+            cmd += _width
 
         # img2txt options
-        #cmd += _strength
-        #cmd += _init_img
+        if mode == IMG2IMG_STR:
+            cmd += _strength
+            cmd += _init_img
 
         if use_seed:
             cmd += _seed

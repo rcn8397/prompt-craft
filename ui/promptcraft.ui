@@ -130,7 +130,7 @@
     <property name="title">
      <string>ddim</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -175,7 +175,7 @@
     <property name="title">
      <string>Constraints</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -234,7 +234,7 @@
     <property name="title">
      <string>Controls</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -314,7 +314,7 @@
     <property name="title">
      <string>Input/Output</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -365,7 +365,7 @@
          <bool>true</bool>
         </property>
         <property name="text">
-         <string>~/Pictures/test.png</string>
+         <string>~/Pictures/00000.png</string>
         </property>
        </widget>
       </item>
@@ -394,10 +394,10 @@
       </rect>
      </property>
      <property name="plainText">
-      <string>Potrait of Batman, intricate, highly detailed, digital painting, art station, smooth, sharp focus, illustration, art by artgerm and greg rutkowski and alphonse much</string>
+      <string>Potrait of Batman, intricate, highly detailed, digital painting, art station, smooth, sharp focus, illustration, art by artgerm and greg rutkowski and alphonse mucha</string>
      </property>
      <property name="placeholderText">
-      <string>Potrait of Batman, intricate, highly detailed, digital painting, art station, smooth, sharp focus, illustration, art by artgerm and greg rutkowski and alphonse much</string>
+      <string>Potrait of Batman, intricate, highly detailed, digital painting, art station, smooth, sharp focus, illustration, art by artgerm and greg rutkowski and alphonse mucha</string>
      </property>
     </widget>
     <widget class="QPushButton" name="clear_btn">
@@ -661,6 +661,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>modeBox</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>toggle_mode()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>91</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>12</x>
+     <y>512</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>run_prompt()</slot>
@@ -668,5 +684,6 @@
   <slot>outdir_dialog()</slot>
   <slot>toggle_rand_seed()</slot>
   <slot>toggle_use_seed()</slot>
+  <slot>toggle_mode()</slot>
  </slots>
 </ui>
