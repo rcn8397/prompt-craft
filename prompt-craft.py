@@ -61,8 +61,12 @@ class Window( QMainWindow, Ui_MainWindow ):
     def toggle_mode( self ):
         mode = self.modeBox.currentIndex()
         self.plms.setEnabled( mode == 0 )
+        self.height.setEnabled( mode == 0 )
+        self.width.setEnabled( mode == 0 )
         self.init_img.setEnabled( mode == 1 )
         self.input_browse.setEnabled( mode == 1 )
+        self.strength.setEnabled( mode == 1 )
+        
 
     def init_image_dialog( self ):
         start = os.path.expanduser( '~/Pictures' )
